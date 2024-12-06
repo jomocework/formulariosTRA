@@ -1,0 +1,158 @@
+<!DOCTYPE html>  
+<html lang="es">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>TRA HUESPED PRINCIPAL</title>  
+    <style>  
+        body {  
+            font-family: Arial, sans-serif;  
+            background-color: #f3f4f6;  
+            margin: 0;  
+            padding: 20px;  
+            display: flex;  
+            justify-content: center;  
+            align-items: center;  
+            height: 100vh;  
+        }  
+        .container {  
+            max-width: 8.5in;  
+            max-height: 11in;  
+            width: 100%;  
+            padding: 20px;  
+            margin: auto;  
+            background: white;  
+            border-radius: 8px;  
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);  
+            overflow: hidden;  
+            page-break-inside: avoid;  
+        }  
+        .header-block {  
+            display: flex;  
+            align-items: center;  
+            justify-content: space-between;  
+            margin-bottom: 20px;  
+        }  
+        .header-block img {  
+            max-height: 84px;  
+        }  
+        h1 {  
+            font-size: 1em;  
+            margin: 0 15px;  
+            flex: 1;  
+        }  
+        .form-group {  
+            display: flex;  
+            align-items: center;  
+            margin-bottom: 20px;  
+        }  
+        label {  
+            flex: 0 0 200px;  
+            margin-right: 10px;  
+            font-weight: bold;  
+        }  
+        input[type="text"],  
+        input[type="number"],  
+        input[type="date"] {  
+            flex: 1;  
+            padding: 10px;  
+            border: 1px solid #ccc;  
+            border-radius: 4px;  
+            text-transform: uppercase;  
+        }  
+        input[type="submit"] {  
+            background-color: #28a745;  
+            color: white;  
+            padding: 10px 15px;  
+            border: none;  
+            border-radius: 4px;  
+            cursor: pointer;  
+            font-size: 16px;  
+        }  
+        input[type="submit"]:hover {  
+            background-color: #218838;  
+        }  
+
+        @media print {  
+            body {  
+                margin: 0;  
+                padding: 0;  
+            }  
+            .container {  
+                max-height: 100%;  
+                overflow: visible;  
+            }  
+            input[type="submit"] {  
+                display: none;  
+            }  
+        }  
+    </style>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>  
+    <script>  
+        async function imprimirFormulario(event) {  
+            event.preventDefault();  
+            window.print();  
+            
+            const { jsPDF } = window.jspdf;  
+            const doc = new jsPDF();  
+
+            const contenido = document.querySelector('.container').innerHTML;  
+            doc.html(contenido, {  
+                callback: function (doc) {  
+                    doc.save('formato.pdf');  
+                },  
+                x: 10,  
+                y: 10,  
+            });  
+        }  
+    </script>  
+</head>  
+<body>  
+    <div class="container">  
+        <div class="header-block">  
+            <img src="LOGO_MINITERIO.png" alt="LOGO_MINITERIO" width="177" height="31">  
+            <h1>REPORTE DE HUÉSPED PRINCIPAL PARA LA TARJETA DE REGISTRO DE ALOJAMIENTO - TRA DEL MINISTERIO DE COMERCIO, INDUSTRIA Y TURISMO</h1>  
+            <img src="LOGO_TRA.png" alt="Logo 2" width="95" height="84">  
+        </div>  
+        <form id="printForm" onsubmit="imprimirFormulario(event);">  
+            <div class="form-group">  
+                <label for="apellidos">Apellidos:</label>  
+                <input type="text" id="apellidos" name="apellidos" required>  
+            </div>  
+            <div class="form-group">  
+                <label for="ciudad_residencia">Ciudad de residencia:</label>  
+                <input type="text" id="ciudad_residencia" name="ciudad_residencia" required>  
+            </div>  
+            <div class="form-group">  
+                <label for="ciudad_procedencia">Ciudad de procedencia:</label>  
+                <input type="text" id="ciudad_procedencia" name="ciudad_procedencia" required>  
+            </div>  
+            <div class="form-group">  
+                <label for="motivo_viaje">Principal motivo de viaje:</label>  
+                <input type="text" id="motivo_viaje" name="motivo_viaje" required>  
+            </div>  
+            <div class="form-group">  
+                <label for="numero_acompanantes">Número de acompañantes:</label>  
+                <input type="number" id="numero_acompanantes" name="numero_acompanantes" required>  
+            </div>  
+            <div class="form-group">  
+                <label for="fecha_entrada">Fecha de entrada:</label>  
+                <input type="date" id="fecha_entrada" name="fecha_entrada" required>  
+            </div>  
+            <div class="form-group">  
+                <label for="fecha_salida">Fecha de salida:</label>  
+                <input type="date" id="fecha_salida" name="fecha_salida" required>  
+            </div>  
+            <div class="form-group">  
+                <label for="tipo_acomodacion">Tipo de acomodación:</label>  
+                <input type="text" id="tipo_acomodacion" name="tipo_acomodacion" required>  
+            </div>  
+            <div class="form-group">  
+                <label for="valor_total">Valor total pagado por el servicio de alojamiento:</label>  
+                <input type="number" id="valor_total" name="valor_total" required>  
+            </div>  
+            <input type="submit" value="Enviar">  
+        </form>  
+    </div>  
+</body>  
+</html>

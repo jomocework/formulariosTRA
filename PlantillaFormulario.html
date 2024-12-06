@@ -1,0 +1,105 @@
+<!DOCTYPE html>  
+<html lang="es">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>PLANTILLA FORMULARIO TRA</title>  
+    <link rel="stylesheet" href="Style.css">  
+    <!-- Asegúrate de incluir la biblioteca jsPDF -->  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>  
+    <script>  
+        async function imprimirFormulario(event) {  
+            event.preventDefault();  // Evita que se envíe el formulario  
+            window.print();  // Llama a la función de impresión  
+            
+            // Generar PDF  
+            const { jsPDF } = window.jspdf;  
+            const doc = new jsPDF();  
+
+            // Obtén el contenido del contenedor  
+            const contenido = document.querySelector('.container').innerHTML;  
+            // Crea una nueva página  
+            doc.html(contenido, {  
+                callback: function (doc) {  
+                    doc.save('formato.pdf');  // Guarda el PDF con el nombre "formato.pdf"  
+                },  
+                x: 10,  
+                y: 10,  
+            });  
+        }  
+    </script>  
+</head>  
+<body>  
+    <div class="container">  
+        <div class="header-block">  
+            <div id="header-left">
+                <img src="LOGO_MINITERIO.png" alt="LOGO_MINITERIO" width="177" height="31">  
+            </div>
+            <div id="header-center">
+                <h1 id="doc-title">REPORTE DE HUÉSPED PRINCIPAL PARA LA TARJETA DE REGISTRO DE ALOJAMIENTO - TRA DEL MINISTERIO DE COMERCIO, INDUSTRIA Y TURISMO</h1>    
+                <h1>Cabaña La Makuira</h1>
+                <h4>RNT No:  </h2>
+            </div>
+            <div id="header-right">
+                <img src="LOGO_TRA.png" alt="Logo 2" width="95" height="84">  
+            </div>
+        </div>  
+
+        <div id="formContainer">
+            <form id="printForm" onsubmit="imprimirFormulario(event);">  
+                <div class="form-group">  
+                    <label for="tipo_identificacion">Tipo de identificación:</label>  
+                    <input type="text" id="tipo_identificacion" name="tipo_identificacion" required>  
+                </div>  
+                <div class="form-group">  
+                    <label for="numero_identificacion">Número de identificación:</label>  
+                    <input type="text" id="numero_identificacion" name="numero_identificacion" required>  
+                </div>  
+                <div class="form-group">  
+                    <label for="nombres">Nombres:</label>  
+                    <input type="text" id="apellidos" name="apellidos" required>  
+                </div>  
+    
+                <div class="form-group">  
+                    <label for="apellidos">Apellidos:</label>  
+                    <input type="text" id="apellidos" name="apellidos" required>  
+                </div>  
+                <div class="form-group">  
+                    <label for="ciudad_residencia">Ciudad de residencia:</label>  
+                    <input type="text" id="ciudad_residencia" name="ciudad_residencia" required>  
+                </div>  
+                <div class="form-group">  
+                    <label for="ciudad_procedencia">Ciudad de procedencia:</label>  
+                    <input type="text" id="ciudad_procedencia" name="ciudad_procedencia" required>  
+                </div>  
+                <div class="form-group">  
+                    <label for="motivo_viaje">Principal motivo de viaje:</label>  
+                    <input type="text" id="motivo_viaje" name="motivo_viaje" required>  
+                </div>  
+                <div class="form-group">  
+                    <label for="numero_acompanantes">Número de acompañantes:</label>  
+                    <input type="number" id="numero_acompanantes" name="numero_acompanantes" required>  
+                </div>  
+                <div class="form-group">  
+                    <label for="fecha_entrada">Fecha de entrada:</label>  
+                    <input type="date" id="fecha_entrada" name="fecha_entrada" required>  
+                </div>  
+                <div class="form-group">  
+                    <label for="fecha_salida">Fecha de salida:</label>  
+                    <input type="date" id="fecha_salida" name="fecha_salida" required>  
+                </div>  
+                <div class="form-group">  
+                    <label for="tipo_acomodacion">Tipo de acomodación:</label>  
+                    <input type="text" id="tipo_acomodacion" name="tipo_acomodacion" required>  
+                </div>  
+                <div class="form-group">  
+                    <label for="valor_total">Valor total pagado por el servicio de alojamiento:</label>  
+                    <input type="number" id="valor_total" name="valor_total" required>  
+                </div>  
+                <input type="submit" value="Enviar">  
+            </form>        
+        </div>
+    </div>  
+</body>  
+</html>
+
